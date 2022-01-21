@@ -24,9 +24,9 @@
                 <h1>BMI Calculator</h1> 
                 <input type="text" placeholder="Enter your height" id="height">
                 <input type="text" placeholder="Enter your weight" id="weight">
-                <button id="btn">Calculate BMI</button>
+                <button id="btn" onclick="CalculateBMI()">Calculate BMI</button>
                 <p id="bmi_result"></p>
-                
+
             </div>
 
             <div class="column" style="background-color:#ccc;">
@@ -36,12 +36,45 @@
         </div>
 
         <script>
+
+            //function to check if a year is leap or not
              function isLeapYear() {
-                var year= document.getElementById("year_input").value;
+
+                var year= document.getElementById("year_input").value;//get year from html
                 document.getElementById("leap_result").innerHTML = (year % 100 === 0) 
                                                                    ? (year % 400 === 0)
                                                                    : (year % 4 === 0);
             }
+
+            //function that calculates BMI
+            function CalculateBMI(){
+
+                var bmi = null;//create bmi var
+                //get weight and height from html elements
+                var weight = parseInt(document.getElementById("weight").value);
+                var height = parseInt(document.getElementById("height").value);
+                var bmi_result = document.getElementById("bmi_result")//get bmi_result paragraph element
+                height = height /100; //devide to convert to meter
+                bmi = weight / (height*height); //calculate bmi
+                bmi = Math.round(bmi * 100) / 100; //round off 2 decimal points
+                
+                if(bmi < 18.5){
+                    bmi_result.innerHTML = bmi + " - Underweight";
+                }else if(bmi <25){
+                    bmi_result.innerHTML = bmi + " - Normal weight";
+                }else if(bmi <30){
+                    bmi_result.innerHTML = bmi + " - Pre-obesity";
+                }else if (bmi < 35) {
+                    bmi_result.innerHTML = bmi + " - Obesity class I";
+                } else if (bmi < 40) {
+                    bmi_result.innerHTML = bmi + " - Obesity class II";
+                } else {
+                    bmi_result.innerHTML = bmi + " - Obesity class III";
+                }
+                
+            }
+
+           
         </script>
     </body>
 
