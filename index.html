@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>JS Assignment</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+
+        <div class="row">
+
+            <div class="column" style="background-color:#aaa;">
+                <h1>Is it a leap year? </h1>
+                <input type="text" placeholder="Enter a year" id = "year_input"/>
+                <input type="button" id="button" onClick="isLeapYear()" value="Check Leap Year">
+                <p id="leap_answer"></p>
+            </div>
+
+            <div class="column" style="background-color:#bbb;">
+                
+            </div>
+
+            <div class="column" style="background-color:#ccc;">
+                
+            </div>
+        </div>
+
+        <script>
+             function isLeapYear() {
+                var year= document.getElementById("year_input").value;
+                
+                document.getElementById("leap_answer").innerHTML = (year % 100 === 0) 
+                                                                   ? (year % 400 === 0)
+                                                                   : (year % 4 === 0);
+            }
+        </script>
+    </body>
+
+</html>
