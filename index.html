@@ -1,81 +1,116 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <title>JS Assignment</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
+<head>
+    <title>JS Assignment</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-    <body>
+<body>
 
-        <div class="row">
+    <div class="row">
 
-            <div class="column" style="background-color:#aaa;">
+        <div class="column" style="background-color:#aaa;">
 
-                <h1>Is it a leap year? </h1>
-                <input type="text" placeholder="Enter a year" id = "year_input"/>
-                <input type="button" id="button" onClick="isLeapYear()" value="Check Leap Year">
-                <p id="leap_result"></p>
+            <h1>Is it a leap year? </h1>
+            <input type="text" placeholder="Enter a year" id="year_input" />
+            <input type="button" id="button" onClick="isLeapYear()" value="Check Leap Year">
+            <p id="leap_result"></p>
 
-            </div>
-
-            <div class="column" style="background-color:#bbb;">
-
-                <h1>BMI Calculator</h1> 
-                <input type="text" placeholder="Enter your height" id="height">
-                <input type="text" placeholder="Enter your weight" id="weight">
-                <button id="btn" onclick="CalculateBMI()">Calculate BMI</button>
-                <p id="bmi_result"></p>
-
-            </div>
-
-            <div class="column" style="background-color:#ccc;">
-                <h2>Column 3</h2>
-                <p>Some text..</p>
-            </div>
         </div>
 
-        <script>
+        <div class="column" style="background-color:#bbb;">
 
-            //function to check if a year is leap or not
-             function isLeapYear() {
+            <h1>BMI Calculator</h1>
+            <input type="text" placeholder="Enter your height" id="height">
+            <input type="text" placeholder="Enter your weight" id="weight">
+            <button id="btn" onclick="CalculateBMI()">Calculate BMI</button>
+            <p id="bmi_result"></p>
 
-                var year= document.getElementById("year_input").value;//get year from html
-                document.getElementById("leap_result").innerHTML = (year % 100 === 0) 
-                                                                   ? (year % 400 === 0)
-                                                                   : (year % 4 === 0);
+        </div>
+
+        <div class="column" style="background-color:#ccc;">
+            <h2>Dealing With Arrays</h2>
+            <p>For this example given the following array: </p>
+            <p>[ 1 , 2 , 2 , 5 , 5 , 6 , 6 , 6 , 7 , 7 ]</p>
+            <button id="btn" onclick="FindSecondMax()">Calculate BMI</button>
+            <p id="second_result"></p>
+
+        </div>
+    </div>
+
+    <script>
+
+        //function to check if a year is leap or not
+        function isLeapYear() {
+
+            var year = document.getElementById("year_input").value;//get year from html
+            document.getElementById("leap_result").innerHTML = (year % 100 === 0)
+                ? (year % 400 === 0)
+                : (year % 4 === 0);
+        }
+
+        //function that calculates BMI
+        function CalculateBMI() {
+
+            var bmi = null;//create bmi var
+            //get weight and height from html elements
+            var weight = parseInt(document.getElementById("weight").value);
+            var height = parseInt(document.getElementById("height").value);
+            var bmi_result = document.getElementById("bmi_result")//get bmi_result paragraph element
+            height = height / 100; //devide to convert to meter
+            bmi = weight / (height * height); //calculate bmi
+            bmi = Math.round(bmi * 100) / 100; //round off 2 decimal points
+
+            if (bmi < 18.5) {
+                bmi_result.innerHTML = bmi + " - Underweight";
+            } else if (bmi < 25) {
+                bmi_result.innerHTML = bmi + " - Normal weight";
+            } else if (bmi < 30) {
+                bmi_result.innerHTML = bmi + " - Pre-obesity";
+            } else if (bmi < 35) {
+                bmi_result.innerHTML = bmi + " - Obesity class I";
+            } else if (bmi < 40) {
+                bmi_result.innerHTML = bmi + " - Obesity class II";
+            } else {
+                bmi_result.innerHTML = bmi + " - Obesity class III";
             }
 
-            //function that calculates BMI
-            function CalculateBMI(){
+        }
 
-                var bmi = null;//create bmi var
-                //get weight and height from html elements
-                var weight = parseInt(document.getElementById("weight").value);
-                var height = parseInt(document.getElementById("height").value);
-                var bmi_result = document.getElementById("bmi_result")//get bmi_result paragraph element
-                height = height /100; //devide to convert to meter
-                bmi = weight / (height*height); //calculate bmi
-                bmi = Math.round(bmi * 100) / 100; //round off 2 decimal points
-                
-                if(bmi < 18.5){
-                    bmi_result.innerHTML = bmi + " - Underweight";
-                }else if(bmi <25){
-                    bmi_result.innerHTML = bmi + " - Normal weight";
-                }else if(bmi <30){
-                    bmi_result.innerHTML = bmi + " - Pre-obesity";
-                }else if (bmi < 35) {
-                    bmi_result.innerHTML = bmi + " - Obesity class I";
-                } else if (bmi < 40) {
-                    bmi_result.innerHTML = bmi + " - Obesity class II";
-                } else {
-                    bmi_result.innerHTML = bmi + " - Obesity class III";
+        function FindSecondMax() {
+            
+            let number_array = [1, 2, 2, 5, 5, 6, 6, 6, 7, 7]; //myarray
+            let first_max = second_max = 0; //initialize first and second max
+
+            
+
+            /*for loop that itirates the whole array
+            checks if index[i] is greater than the first
+            if true --> second_max = first_max & first_max = element[i]
+            if element[i] is btn the first and second --> second_max = element[i]
+            prints in innerHTML
+            */ 
+            for ( var i = 0; i < number_array.length; i++) {
+                if (number_array[i] > first_max) {
+                    second_max = first_max;
+                    first_max = number_array[i];
+                }else if (first_max > number_array[i] > second_max){
+                    second_max = number_array[i];
+                    
                 }
                 
             }
+            document.getElementById("second_result").innerHTML = second_max;
 
            
-        </script>
-    </body>
+        }
+
+
+        
+        
+
+    </script>
+</body>
 
 </html>
