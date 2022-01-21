@@ -14,7 +14,7 @@
 
             <h1>Is it a leap year? </h1>
             <input type="text" placeholder="Enter a year" id="year_input" />
-            <input type="button" id="button" onClick="isLeapYear()" value="Check Leap Year">
+            <input type="button" onClick="isLeapYear()" value="Check Leap Year">
             <p id="leap_result"></p>
 
         </div>
@@ -45,11 +45,13 @@
 
         //function to check if a year is leap or not
         function isLeapYear() {
-
+            
             var year = document.getElementById("year_input").value;//get year from html
-            document.getElementById("leap_result").innerHTML = (year % 100 === 0)
-                ? (year % 400 === 0)
-                : (year % 4 === 0) + "test";
+            if(year % 4 == 0 && year % 100 != 0 || year % 400 == 0){
+                document.getElementById("leap_result").innerHTML = "The year " +year+ "is a leap year!";
+            }else{
+                document.getElementById("leap_result").innerHTML = "The year " +year+ "is not a leap year!";
+            }
         }
         //end
 
@@ -115,13 +117,13 @@
         function FindUniqueElement() {
 
             var unique_numbers = [];
+            //check if the index of the first and last occurance are the same --> add to array --> print in unique_element <p>
             for (var i = 0; i < number_array.length; i++) {
                 
                 if (number_array.lastIndexOf(number_array[i]) === number_array.indexOf(number_array[i])) {
                     unique_numbers.push(number_array[i]);
                 }
             }
-
             document.getElementById("unique_element").innerHTML = "The unique number is " +unique_numbers;
 
         }
