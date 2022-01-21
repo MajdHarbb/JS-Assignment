@@ -22,8 +22,8 @@
         <div class="column" style="background-color:#bbb;">
 
             <h1>BMI Calculator</h1>
-            <input  type="text" placeholder="Enter your height" id="height">
-            <input  type="text" placeholder="Enter your weight" id="weight">
+            <input type="text" placeholder="Enter your height" id="height">
+            <input type="text" placeholder="Enter your weight" id="weight">
             <button onclick="CalculateBMI()">Calculate BMI</button>
             <p id="bmi_result"></p>
 
@@ -33,6 +33,8 @@
             <h1>Dealing With Arrays</h1>
             <p>For this example given the following array: </p>
             <p>[ 1 , 2 , 2 , 5 , 5 , 6 , 6 , 6 , 7 , 7 ]</p>
+            <button onclick="FindUniqueElement()">Unique Element</button>
+            <p id="unique_element"></p>
             <button onclick="FindSecondMax()">Second Maximum</button>
             <p id="second_max_result"></p>
 
@@ -47,7 +49,7 @@
             var year = document.getElementById("year_input").value;//get year from html
             document.getElementById("leap_result").innerHTML = (year % 100 === 0)
                 ? (year % 400 === 0)
-                : (year % 4 === 0);
+                : (year % 4 === 0) + "test";
         }
         //end
 
@@ -79,41 +81,53 @@
         }
         //end
 
+        var number_array = [1, 2, 2, 5, 5, 6, 6, 6, 7, 7];  //array for the next two functions
+
 
         //function that prints the second largest number
         function FindSecondMax() {
-            
-            let number_array = [1, 2, 2, 5, 5, 6, 6, 6, 7, 7]; //myarray
+
+
             let first_max = second_max = 0; //initialize first and second max
-
-            
-
             /*for loop that itirates the whole array
             checks if index[i] is greater than the first
             if true --> second_max = first_max & first_max = element[i]
             if element[i] is btn the first and second --> second_max = element[i]
             prints in innerHTML
-            */ 
-            for ( var i = 0; i < number_array.length; i++) {
+            */
+            for (var i = 0; i < number_array.length; i++) {
                 if (number_array[i] > first_max) {
                     second_max = first_max;
                     first_max = number_array[i];
-                }else if (first_max > number_array[i] > second_max){
+                } else if (first_max > number_array[i] > second_max) {
                     second_max = number_array[i];
-                    
-                }
-                
-            }
-            document.getElementById("second_max_result").innerHTML = second_max;
 
-           
+                }
+
+            }
+            document.getElementById("second_max_result").innerHTML = "The second maximum is :" +second_max;
+
+
         }
         //end
 
+        //function to find the non-repeated element (1)
+        function FindUniqueElement() {
+
+            var unique_numbers = [];
+            for (var i = 0; i < number_array.length; i++) {
+                
+                if (number_array.lastIndexOf(number_array[i]) === number_array.indexOf(number_array[i])) {
+                    unique_numbers.push(number_array[i]);
+                }
+            }
+
+            document.getElementById("unique_element").innerHTML = "The unique number is " +unique_numbers;
+
+        }
 
 
-        
-        
+
 
     </script>
 </body>
