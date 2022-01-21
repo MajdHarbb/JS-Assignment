@@ -3,6 +3,7 @@
 
 <head>
     <title>JS Assignment</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -10,27 +11,27 @@
 
     <div class="row">
         <!--Div for leap year section-->
-        <div class="column" style="background-color:#aaa;">
+        <div class="column">
 
             <h1>Is it a leap year? </h1>
             <input type="text" placeholder="Enter a year" id="year_input" />
-            <input type="button" onClick="isLeapYear()" value="Check Leap Year">
+            <button onclick="isLeapYear()">Check Leap Year</button>
             <p id="leap_result"></p>
 
         </div>
         <!--Div for BMI section-->
-        <div class="column" style="background-color:#bbb;">
+        <div class="column">
 
             <h1>BMI Calculator</h1>
             <input type="text" placeholder="Enter your height" id="height">
             <input type="text" placeholder="Enter your weight" id="weight">
             <p></p>
-            <button onclick="CalculateBMI()">Calculate BMI</button>
+            <button class="" onclick="CalculateBMI()">Calculate BMI</button>
             <p id="bmi_result"></p>
 
         </div>
         <!--Div for handling arrays section-->
-        <div class="column" style="background-color:#ccc;">
+        <div class="column">
             <h1>Dealing With Arrays</h1>
             <p>For this example given the following array: </p>
             <p>[ 1 , 2 , 2 , 5 , 5 , 6 , 6 , 6 , 7 , 7 ]</p>
@@ -41,22 +42,29 @@
 
         </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
     <script>
 
         //function to check if a year is leap or not
         function isLeapYear() {
-            
+
             var year = document.getElementById("year_input").value;//get year from html
-            if(year % 4 == 0 && year % 100 != 0 || year % 400 == 0){
-                document.getElementById("leap_result").innerHTML = "The year " +year+ "is a leap year!";
+            if (document.getElementById("year_input").value.length == 0) {
+                alert("empty")
             }else{
-                document.getElementById("leap_result").innerHTML = "The year " +year+ "is not a leap year!";
+                if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+                document.getElementById("leap_result").innerHTML = "The year " + year + "is a leap year!";
+            } else {
+                document.getElementById("leap_result").innerHTML = "The year " + year + "is not a leap year!";
             }
+            }
+            
         }
         //end
 
-        
+
         //function that calculates BMI
         function CalculateBMI() {
 
@@ -67,9 +75,10 @@
             height = height / 100; //devide to convert to meter
             bmi = weight / (height * height); //calculate bmi
             bmi = Math.round(bmi * 100) / 100; //round off 2 decimal points
-            
-            
-            if (bmi < 18.5) {
+            if (document.getElementById("weight").value.length == 0 || document.getElementById("height").value.length == 0) {
+                alert("Please eneter weight and height.")
+            }else{
+                if (bmi < 18.5) {
                 document.getElementById("bmi_result").innerHTML = bmi + " - Underweight";
             } else if (bmi < 25) {
                 document.getElementById("bmi_result").innerHTML = bmi + " - Normal weight";
@@ -82,8 +91,11 @@
             } else {
                 document.getElementById("bmi_result").innerHTML = bmi + " - Obesity class III";
             }
+            }
+
             
-            
+
+
 
         }
         //end
@@ -112,7 +124,7 @@
                 }
 
             }
-            document.getElementById("second_max_result").innerHTML = "The second maximum is :" +second_max;
+            document.getElementById("second_max_result").innerHTML = "The second maximum is :" + second_max;
 
 
         }
@@ -124,13 +136,21 @@
             var unique_numbers = [];
             //check if the index of the first and last occurance are the same --> add to array --> print in unique_element <p>
             for (var i = 0; i < number_array.length; i++) {
-                
+
                 if (number_array.lastIndexOf(number_array[i]) === number_array.indexOf(number_array[i])) {
                     unique_numbers.push(number_array[i]);
                 }
             }
-            document.getElementById("unique_element").innerHTML = "The unique number is " +unique_numbers;
+            document.getElementById("unique_element").innerHTML = "The unique number is " + unique_numbers;
 
+        }
+
+        function required(inputtx) {
+            if (inputtx.value.length == 0) {
+                alert("message");
+                return false;
+            }
+            return true;
         }
 
 
