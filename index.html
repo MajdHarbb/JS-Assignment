@@ -24,6 +24,7 @@
             <h1>BMI Calculator</h1>
             <input type="text" placeholder="Enter your height" id="height">
             <input type="text" placeholder="Enter your weight" id="weight">
+            <p></p>
             <button onclick="CalculateBMI()">Calculate BMI</button>
             <p id="bmi_result"></p>
 
@@ -55,6 +56,7 @@
         }
         //end
 
+        
         //function that calculates BMI
         function CalculateBMI() {
 
@@ -65,7 +67,8 @@
             height = height / 100; //devide to convert to meter
             bmi = weight / (height * height); //calculate bmi
             bmi = Math.round(bmi * 100) / 100; //round off 2 decimal points
-
+            
+            
             if (bmi < 18.5) {
                 document.getElementById("bmi_result").innerHTML = bmi + " - Underweight";
             } else if (bmi < 25) {
@@ -79,6 +82,8 @@
             } else {
                 document.getElementById("bmi_result").innerHTML = bmi + " - Obesity class III";
             }
+            
+            
 
         }
         //end
